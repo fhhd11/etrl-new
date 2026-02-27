@@ -77,7 +77,7 @@ balance:
   refillAmount: 2000
 
 # ==============================================================================
-# 5. ОГРАНИЧЕНИЯ ФАЙЛОВ
+# 5. ОГРАНИЧЕНИЯ
 # ==============================================================================
 fileConfig:
   serverFileSizeLimit: 50
@@ -86,3 +86,16 @@ fileConfig:
     custom:
       fileLimit: 5
       fileSizeLimit: 10
+
+rateLimits:
+  messages:
+    max: 100                # Максимальное количество сообщений
+    windowInMinutes: 60     # Временное окно в минутах (1 час)
+  
+  # Дополнительные лимиты для безопасности
+  fileUploads:
+    ipMax: 20
+    ipWindowInMinutes: 60
+  conversationsImport:
+    ipMax: 5
+    ipWindowInMinutes: 60
