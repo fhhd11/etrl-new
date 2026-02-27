@@ -1,17 +1,23 @@
 version: 1.3.4
+
 cache: true
-customCSS: true
 fileStrategy: "s3"
 
+# ==============================================================================
+# 1. ИНТЕРФЕЙС
+# ==============================================================================
 interface:
   appTitle: 'ETRL Chat'
   customWelcome: 'Добро пожаловать в ETRL Chat!'
+  customCSS: true # <--- ПЕРЕНЕСЕНО СЮДА (из корня)
+  
   runCode: false
-  endpointsMenu: false
+  endpointsMenu: false 
   modelSelect: false
   parameters: false
   presets: false
-  showTokens: false # КРИТИЧЕСКИ ВАЖНО: Скрываем дефолтный счетчик баланса
+  showTokens: false
+  
   sidePanel: true
   fileSearch: true
   bookmarks: true
@@ -19,20 +25,19 @@ interface:
   fileCitations: true
   agents:
     use: true
-    share: false
-    public: false
   prompts:
     use: true
-    share: false
-    public: false
   marketplace:
     use: false
   mcpServers:
     use: false
 
+# ==============================================================================
+# 2. ЭНДПОИНТЫ (Бэкенд)
+# ==============================================================================
 endpoints:
   custom:
-    - name: 'etrl'
+    - name: 'etrl' # Имя этого эндпоинта
       apiKey: '${ETRL_API_KEY}'
       baseURL: 'https://api.z.ai/api/coding/paas/v4'
       models:
@@ -44,31 +49,25 @@ endpoints:
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
       supportsFiles: true
       fileTypes: ['image/*', 'application/pdf', 'text/*']
-      maxTokens: 4096
-      contentFormats:
-        - type: 'text'
-          mime_types: ['text/plain', 'text/markdown']
-        - type: 'image_url'
-          mime_types: ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
-        - type: 'file'
-          mime_types: ['application/pdf']
-      tokenConfig:
-        glm-4.7:
-          prompt: 0.25
-          completion: 0.80
-          context: 180000
 
+# ==============================================================================
+# 3. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ (То, что видит юзер)
+# ==============================================================================
 modelSpecs:
   list:
     - name: 'glm-4.7'
       label: 'ETRL AI'
       description: 'Ваш персональный AI помощник'
+      default: true # Делаем модель основной
       preset:
-        endpoint: 'custom'
+        endpoint: 'etrl' # <--- ДОЛЖНО СОВПАДАТЬ С name В endpoints.custom ВЫШЕ
         model: 'glm-4.7'
       fileUpload: true
       visionCapable: true
 
+# ==============================================================================
+# 4. БИЛЛИНГ
+# ==============================================================================
 balance:
   enabled: true
   startBalance: 5000
@@ -77,6 +76,9 @@ balance:
   refillIntervalUnit: "days"
   refillAmount: 2000
 
+# ==============================================================================
+# 5. ОГРАНИЧЕНИЯ ФАЙЛОВ
+# ==============================================================================
 fileConfig:
   serverFileSizeLimit: 50
   avatarSizeLimit: 2
