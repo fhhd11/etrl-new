@@ -34,7 +34,7 @@ export default function BillingSuccessPage() {
       <div className="absolute top-0 left-0 w-full p-6 flex justify-center z-20">
         <Link className="flex items-center justify-center gap-2 group" href="/">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
-            <Bot className="h-5 w-5" />
+            <img src="/logo.svg" alt="ETRL Logo" className="h-5 w-5" />
           </div>
           <span className="font-semibold text-xl tracking-tight text-zinc-100">ETRL Chat</span>
         </Link>

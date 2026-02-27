@@ -21,7 +21,7 @@ export default function Home() {
       <header className="px-6 h-16 flex items-center border-b border-white/10 backdrop-blur-md bg-zinc-950/50 sticky top-0 z-50">
         <Link className="flex items-center justify-center gap-2 group" href="/">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
-            <Bot className="h-5 w-5" />
+            <img src="/logo.svg" alt="ETRL Logo" className="h-5 w-5" />
           </div>
           <span className="font-semibold text-xl tracking-tight text-zinc-100">ETRL Chat</span>
         </Link>
