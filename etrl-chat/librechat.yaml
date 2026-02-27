@@ -16,7 +16,7 @@ interface:
   modelSelect: false
   parameters: false
   presets: false
-  showTokens: false
+  showTokens: true
   
   sidePanel: true
   fileSearch: true
