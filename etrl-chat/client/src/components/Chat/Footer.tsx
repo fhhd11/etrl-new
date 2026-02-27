@@ -27,9 +27,9 @@ export default function Footer({ className }: { className?: string }) {
   const mainContentParts = (
     typeof config?.customFooter === 'string'
       ? config.customFooter
-      : '[LibreChat ' +
+      : '[etrl.chat ' +
         Constants.VERSION +
-        '](https://librechat.ai) - ' +
+        '](https://etrl.chat) - ' +
         localize('com_ui_latest_footer')
   ).split('|');
 

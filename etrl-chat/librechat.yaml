@@ -31,6 +31,13 @@ interface:
     use: false
   mcpServers:
     use: false
+  privacyPolicy:
+    externalUrl: 'https://etrl.chat/privacy'
+    openNewTab: true
+  termsOfService:
+    externalUrl: 'https://etrl.chat/terms'
+    openNewTab: true
+  helpAndFaqURL: ''
 
 # ==============================================================================
 # 2. ЭНДПОИНТЫ (Бэкенд)
