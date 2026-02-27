@@ -57,8 +57,12 @@ export async function POST(req: Request) {
         { user: { $in: userIds } },
         { 
           $set: { 
-            tokenCredits: 0,
-            autoRefillEnabled: true 
+            tokenCredits: 1500,
+            autoRefillEnabled: true,
+            refillIntervalValue: 1,
+            refillIntervalUnit: 'days',
+            refillAmount: 1000,
+            lastRefill: new Date()
           } 
         }
       );
