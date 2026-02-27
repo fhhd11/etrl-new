@@ -36,7 +36,7 @@ export async function createPaymentSession(userId: string, email: string) {
     
     const createPayload = {
       amount: {
-        value: "500.00",
+        value: "490.00",
         currency: "RUB"
       },
       payment_method_data: {
@@ -61,7 +61,7 @@ export async function createPaymentSession(userId: string, email: string) {
             description: "Подписка PRO (1 месяц)",
             quantity: "1.00",
             amount: {
-              value: "500.00",
+              value: "490.00",
               currency: "RUB"
             },
             vat_code: "1", // Без НДС

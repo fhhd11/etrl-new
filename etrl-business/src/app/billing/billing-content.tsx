@@ -120,7 +120,7 @@ export default function BillingPageContent() {
               Максимум возможностей для вашей продуктивности
             </CardDescription>
             <div className="mt-6 flex items-baseline justify-center gap-x-2">
-              <span className="text-5xl font-extrabold tracking-tight text-white">500</span>
+              <span className="text-5xl font-extrabold tracking-tight text-white">490</span>
               <span className="text-xl font-medium text-zinc-400">₽ / мес</span>
             </div>
           </CardHeader>
