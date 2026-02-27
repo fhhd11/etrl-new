@@ -39,9 +39,6 @@ export async function createPaymentSession(userId: string, email: string) {
         value: "490.00",
         currency: "RUB"
       },
-      payment_method_data: {
-        type: "bank_card"
-      },
       confirmation: {
         type: "redirect",
         return_url: returnUrl
