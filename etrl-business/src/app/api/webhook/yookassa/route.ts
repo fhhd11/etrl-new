@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import clientPromise from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
 
 export async function POST(req: Request) {
   try {
@@ -85,8 +86,17 @@ export async function POST(req: Request) {
       const db = mongoClient.db();
       
       // Inject tokenCredits (large number for unlimited)
+      // LibreChat uses ObjectId for the user reference in the balances collection
+      let userObjectId;
+      try {
+        userObjectId = new ObjectId(user_id);
+      } catch (e) {
+        // If it's not a valid ObjectId, fallback to string (just in case)
+        userObjectId = user_id;
+      }
+
       await db.collection('balances').updateOne(
-        { user: user_id },
+        { user: userObjectId },
         { $set: { tokenCredits: 1000000000 } },
         { upsert: true }
       );
