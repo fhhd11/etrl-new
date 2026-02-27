@@ -1,0 +1,86 @@
+version: 1.1.5
+cache: true
+customCSS: true
+fileStrategy: "s3"
+
+interface:
+  appTitle: 'ETRL Chat'
+  customWelcome: 'Добро пожаловать в ETRL Chat!'
+  runCode: false
+  endpointsMenu: false
+  modelSelect: false
+  parameters: false
+  presets: false
+  showTokens: false # КРИТИЧЕСКИ ВАЖНО: Скрываем дефолтный счетчик баланса
+  sidePanel: true
+  fileSearch: true
+  bookmarks: true
+  multiConvo: true
+  fileCitations: true
+  agents:
+    use: true
+    share: false
+    public: false
+  prompts:
+    use: true
+    share: false
+    public: false
+  marketplace:
+    use: false
+  mcpServers:
+    use: false
+
+endpoints:
+  custom:
+    - name: 'etrl'
+      apiKey: '${ETRL_API_KEY}'
+      baseURL: 'https://api.z.ai/api/coding/paas/v4'
+      models:
+        default: ['glm-4.7']
+        fetch: false
+      titleConvo: true
+      titleModel: 'glm-4.7'
+      modelDisplayLabel: 'ETRL AI'
+      dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
+      supportsFiles: true
+      fileTypes: ['image/*', 'application/pdf', 'text/*']
+      maxTokens: 4096
+      contentFormats:
+        - type: 'text'
+          mime_types: ['text/plain', 'text/markdown']
+        - type: 'image_url'
+          mime_types: ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+        - type: 'file'
+          mime_types: ['application/pdf']
+      tokenConfig:
+        glm-4.7:
+          prompt: 0.25
+          completion: 0.80
+          context: 180000
+
+modelSpecs:
+  list:
+    - name: 'glm-4.7'
+      label: 'ETRL AI'
+      description: 'Ваш персональный AI помощник'
+      preset:
+        endpoint: 'custom'
+        model: 'glm-4.7'
+      fileUpload: true
+      visionCapable: true
+
+balance:
+  enabled: true
+  startBalance: 5000
+  autoRefillEnabled: true
+  refillIntervalValue: 1
+  refillIntervalUnit: "days"
+  refillAmount: 2000
+
+fileConfig:
+  serverFileSizeLimit: 50
+  avatarSizeLimit: 2
+  endpoints:
+    custom:
+      fileLimit: 5
+      fileSizeLimit: 10
