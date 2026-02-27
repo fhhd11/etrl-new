@@ -55,7 +55,12 @@ export async function POST(req: Request) {
       
       await db.collection('balances').updateMany(
         { user: { $in: userIds } },
-        { $set: { tokenCredits: 0 } }
+        { 
+          $set: { 
+            tokenCredits: 0,
+            autoRefillEnabled: true 
+          } 
+        }
       );
       
       console.log(`Successfully reset balances for ${userIds.length} users`);
