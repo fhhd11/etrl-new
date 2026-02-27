@@ -8,8 +8,7 @@ export default function BalanceWidget() {
 
   if (!user) return null;
 
-  const balanceString = data ?? '0';
-  const balance = parseFloat(balanceString as string);
+  const balance = data?.tokenCredits ?? 0;
   const isPro = balance > 1000000;
 
   if (isPro) {

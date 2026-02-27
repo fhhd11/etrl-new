@@ -32,6 +32,7 @@ import store from '~/store';
 
 const BookmarkNav = lazy(() => import('./Bookmarks/BookmarkNav'));
 const AccountSettings = lazy(() => import('./AccountSettings'));
+const BalanceWidget = lazy(() => import('~/components/Balance/BalanceWidget'));
 
 export const NAV_WIDTH = {
   MOBILE: 320,
@@ -248,6 +249,9 @@ const Nav = memo(
             </div>
           </div>
           <Suspense fallback={<Skeleton className="mt-1 h-12 w-full rounded-xl" />}>
+            <div className="mb-2 px-2">
+              <BalanceWidget />
+            </div>
             <AccountSettings />
           </Suspense>
         </nav>
