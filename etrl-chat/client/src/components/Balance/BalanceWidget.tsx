@@ -1,14 +1,14 @@
 import React from 'react';
-import { useGetUserBalance } from 'librechat-data-provider/react-query';
+import { useGetUserBalance } from '~/data-provider';
 import { useAuthContext } from '~/hooks/AuthContext';
 
 export default function BalanceWidget() {
   const { user } = useAuthContext();
-  const { data } = useGetUserBalance({ enabled: !!user });
+  const balanceQuery = useGetUserBalance();
 
   if (!user) return null;
 
-  const balance = data?.tokenCredits ?? 0;
+  const balance = balanceQuery.data?.tokenCredits ?? 0;
   const isPro = balance > 1000000;
 
   if (isPro) {
