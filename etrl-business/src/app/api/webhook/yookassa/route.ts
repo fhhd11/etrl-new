@@ -97,7 +97,12 @@ export async function POST(req: Request) {
 
       await db.collection('balances').updateOne(
         { user: userObjectId },
-        { $set: { tokenCredits: 1000000000 } },
+        { 
+          $set: { 
+            tokenCredits: 1000000000,
+            autoRefillEnabled: false 
+          } 
+        },
         { upsert: true }
       );
       
