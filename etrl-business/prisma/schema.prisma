@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id // ID from LibreChat (MongoDB ObjectID)
+  email         String
+  createdAt     DateTime       @default(now())
+  subscriptions Subscription[]
+  referrals     Referral[]     // Who this user referred
+  transactions  Transaction[]
+}
+
+model Subscription {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  status    String   // 'active', 'expired'
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id                String   @id @default(uuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  yookassaPaymentId String   @unique
+  amount            Float
+  status            String   // 'pending', 'succeeded', 'canceled'
+  createdAt         DateTime @default(now())
+}
+
+model Referral {
+  id           String   @id @default(uuid())
+  userId       String   @unique // ID of the registered user
+  user         User     @relation(fields: [userId], references: [id])
+  referrerCode String   // Code from cookie (ref_code)
+  createdAt    DateTime @default(now())
+}
