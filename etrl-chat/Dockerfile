@@ -42,6 +42,8 @@ RUN \
 COPY --chown=node:node . .
 
 RUN \
+    # Build packages (@librechat/api, @librechat/data-provider, etc)
+    npm run build:packages; \
     # React client build with configurable memory
     NODE_OPTIONS="--max-old-space-size=${NODE_MAX_OLD_SPACE_SIZE}" npm run frontend; \
     npm prune --production; \
