@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="ETRL Chat — стратегическая презентация AI Workspace для партнеров и интеграторов." />
+    <title>ETRL Chat — Strategic Partner Presentation</title>
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --bg: #09090b;
+        --panel: rgba(24, 24, 27, 0.72);
+        --line: rgba(255, 255, 255, 0.1);
+        --line-soft: rgba(255, 255, 255, 0.06);
+        --text: #f4f4f5;
+        --muted: #a1a1aa;
+        --muted-2: #71717a;
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.16);
+        --blue-soft: rgba(59, 130, 246, 0.14);
+        --violet-soft: rgba(139, 92, 246, 0.16);
+        --orange-soft: rgba(245, 158, 11, 0.16);
+        --cyan-soft: rgba(6, 182, 212, 0.15);
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { background: var(--bg); scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.18), transparent 24%),
+          radial-gradient(circle at 85% 12%, rgba(59, 130, 246, 0.13), transparent 24%),
+          radial-gradient(circle at 50% 40%, rgba(139, 92, 246, 0.08), transparent 30%),
+          linear-gradient(180deg, #09090b 0%, #0b0b0e 100%);
+        color: var(--text);
+      }
+
+      .deck {
+        width: min(1360px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 20px 0 40px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0 auto 16px;
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(9, 9, 11, 0.78);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+      }
+
+      .brand { display: flex; align-items: center; gap: 14px; }
+      .brand-mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid rgba(16, 185, 129, 0.22);
+        background: linear-gradient(180deg, rgba(16, 185, 129, 0.16), rgba(16, 185, 129, 0.06));
+      }
+      .brand-mark img { width: 22px; height: 22px; }
+      .brand-copy h1 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+      .brand-copy p, .topbar-note, .eyebrow, .body, .metric-label, .list, .footer-note, .mini { color: var(--muted); }
+      .brand-copy p, .topbar-note { margin: 2px 0 0; font-size: 12px; }
+      .topbar-note { text-align: right; max-width: 340px; }
+
+      .slide {
+        position: relative;
+        min-height: 920px;
+        margin-bottom: 24px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)), var(--panel);
+        backdrop-filter: blur(24px);
+        box-shadow: var(--shadow);
+      }
+
+      .slide::before, .slide::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(80px);
+        pointer-events: none;
+      }
+      .slide::before {
+        top: -120px;
+        right: -80px;
+        width: 320px;
+        height: 320px;
+        background: rgba(59, 130, 246, 0.12);
+      }
+      .slide::after {
+        bottom: -140px;
+        left: -60px;
+        width: 340px;
+        height: 340px;
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .slide-inner { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 920px; padding: 42px; }
+      .slide-index {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.08);
+        color: #bbf7d0;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .hero-title, .section-title {
+        margin: 20px 0 0;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
+      }
+      .hero-title {
+        max-width: 1040px;
+        font-size: 72px;
+        background: linear-gradient(135deg, #fafafa 0%, #e4e4e7 42%, #71717a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .section-title { max-width: 920px; font-size: 52px; }
+      .hero-subtitle, .section-subtitle {
+        max-width: 900px;
+        margin: 20px 0 0;
+        font-size: 22px;
+        line-height: 1.5;
+        color: #c4c4cb;
+      }
+      .eyebrow { margin: 0; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+      .grid-2, .grid-3, .grid-4, .metrics, .pillars, .cards, .timeline, .partner-grid, .footer-grid {
+        display: grid;
+        gap: 18px;
+      }
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .timeline { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .partner-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: 1.2fr 0.8fr; align-items: end; }
+
+      .stack-40 { margin-top: 40px; }
+      .stack-48 { margin-top: 48px; }
+      .stack-56 { margin-top: 56px; }
+
+      .panel, .metric, .tile, .timeline-card, .partner-card, .quote, .footer-card {
+        border: 1px solid var(--line-soft);
+        border-radius: 20px;
+        background: rgba(24, 24, 27, 0.56);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      }
+      .panel, .tile, .timeline-card, .partner-card, .quote, .footer-card { padding: 24px; }
+      .metric { padding: 22px; }
+      .metric-value { display: block; font-size: 34px; font-weight: 700; letter-spacing: -0.04em; }
+      .metric-label { display: block; margin-top: 8px; font-size: 14px; line-height: 1.5; }
+
+      .kicker {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .green { background: var(--green-soft); color: #a7f3d0; border: 1px solid rgba(16,185,129,.18); }
+      .blue { background: var(--blue-soft); color: #bfdbfe; border: 1px solid rgba(59,130,246,.16); }
+      .violet { background: var(--violet-soft); color: #ddd6fe; border: 1px solid rgba(139,92,246,.16); }
+      .orange { background: var(--orange-soft); color: #fde68a; border: 1px solid rgba(245,158,11,.16); }
+      .cyan { background: var(--cyan-soft); color: #a5f3fc; border: 1px solid rgba(6,182,212,.16); }
+
+      .panel h3, .tile h3, .partner-card h3, .timeline-card h3, .footer-card h3 {
+        margin: 14px 0 0;
+        font-size: 24px;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+      .body, .list, .mini { font-size: 16px; line-height: 1.65; }
+      .list { margin: 16px 0 0; padding-left: 18px; }
+      .list li + li { margin-top: 10px; }
+      .big-quote { margin: 0; font-size: 28px; line-height: 1.45; color: #fafafa; letter-spacing: -0.03em; }
+      .quote-source { margin-top: 16px; font-size: 14px; color: var(--muted-2); }
+
+      .matrix {
+        display: grid;
+        grid-template-columns: 1.1fr repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 28px;
+        overflow: hidden;
+        border: 1px solid var(--line-soft);
+        border-radius: 22px;
+        background: rgba(255,255,255,0.05);
+      }
+      .matrix div {
+        padding: 18px 18px;
+        background: rgba(24,24,27,0.72);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+      .matrix .head { font-weight: 700; color: #fafafa; }
+      .matrix .accent { color: #bbf7d0; }
+
+      .two-column-hero {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 24px;
+        align-items: start;
+        margin-top: 34px;
+      }
+      .spotlight {
+        padding: 28px;
+        border: 1px solid rgba(16,185,129,.18);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(16,185,129,.1), rgba(24,24,27,.7));
+      }
+      .spotlight h3 { margin: 18px 0 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.03em; }
+      .spotlight .body { margin-top: 14px; }
+      .highlight-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+      .highlight {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line-soft);
+        background: rgba(255,255,255,0.04);
+        color: #d4d4d8;
+        font-size: 14px;
+      }
+      .footer-note { margin-top: 18px; font-size: 14px; line-height: 1.6; }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        margin-top: 26px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, rgba(16,185,129,0.22), rgba(16,185,129,0.14));
+        border: 1px solid rgba(16,185,129,0.24);
+        color: #ecfdf5;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .mini { margin-top: 12px; }
+
+      @media (max-width: 1100px) {
+        .deck { width: min(100vw - 24px, 1320px); padding-top: 14px; }
+        .hero-title { font-size: 54px; }
+        .section-title { font-size: 40px; }
+        .hero-subtitle, .section-subtitle { font-size: 18px; }
+        .grid-2, .grid-3, .grid-4, .metrics, .pillars, .cards, .timeline, .partner-grid, .footer-grid, .two-column-hero {
+          grid-template-columns: 1fr;
+        }
+        .slide, .slide-inner { min-height: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck">
+      <section class="topbar">
+        <div class="brand">
+          <div class="brand-mark">
+            <img src="./assets/logo.svg" alt="ETRL Chat logo" />
+          </div>
+          <div class="brand-copy">
+            <h1>ETRL Chat</h1>
+            <p>Strategic Partner Presentation</p>
+          </div>
+        </div>
+        <div class="topbar-note">Премиальная презентация проекта для стратегических партнеров, продуктовых интеграторов и корпоративных экосистем.</div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-inner">
+          <div class="slide-index">01 / Introduction</div>
+          <p class="eyebrow">AI Workspace нового поколения</p>
+          <h2 class="hero-title">ETRL Chat — платформа, которая превращает AI-диалог в рабочую инфраструктуру результата.</h2>
+          <p class="hero-subtitle">ETRL Chat объединяет умный чат, глубокую работу с документами, web search, live-артефакты, агентные сценарии и управляемую память в одной среде. Это не очередной интерфейс к LLM, а операционный слой для знаний, логики, кода и внутренних процессов.</p>
+          <div class="two-column-hero">
+            <div class="spotlight">
+              <div class="kicker green">Почему это важно</div>
+              <h3>Рынок устал от разрозненных AI-инструментов и ищет единый слой продуктивности.</h3>
+              <p class="body">Команды переключаются между чатами, документами, браузером, IDE и внутренними базами знаний. ETRL Chat сокращает этот разрыв, соединяя контекст, анализ, генерацию и исполнение в одном UX.</p>
+              <div class="highlight-row">
+                <div class="highlight">Long-context работа</div>
+                <div class="highlight">Документы + поиск + код</div>
+                <div class="highlight">Artifacts с превью</div>
+                <div class="highlight">Agents под роли</div>
+                <div class="highlight">Безопасная персонализация</div>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="metric"><span class="metric-value">1</span><span class="metric-label">единая среда вместо набора несвязанных AI-сервисов</span></div>
+              <div class="metric"><span class="metric-value">6+</span><span class="metric-label">ключевых продуктовых слоёв в одном опыте пользователя</span></div>
+              <div class="metric"><span class="metric-value">B2C → B2B</span><span class="metric-label">архитектура подходит и для частного, и для корпоративного сегмента</span></div>
+              <div class="metric"><span class="metric-value">24/7</span><span class="metric-label">формат цифрового рабочего пространства, а не разовых запросов</span></div>
+            </div>
+          </div>
+          <div class="stack-40 quote panel">
+            <p class="big-quote">“ETRL Chat создаёт рабочий интерфейс, где AI не просто отвечает, а помогает анализировать, создавать, структурировать и доводить задачи до результата в едином потоке.”</p>
+            <div class="quote-source">Позиционирование продукта для стратегических партнеров</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">02 / Market Problem</div><p class="eyebrow">Проблема, которую решает платформа</p><h2 class="section-title">Главный разрыв рынка: AI умеет генерировать, но редко встроен в реальную рабочую систему.</h2><p class="section-subtitle">Большинство решений сегодня закрывают отдельные сценарии. Пользователь получает чат отдельно, документы отдельно, агентов отдельно, код отдельно. В итоге AI помогает точечно, но не становится ежедневной продуктивной средой.</p><div class="metrics stack-48"><div class="metric"><span class="metric-value">Контекст</span><span class="metric-label">теряется между окнами, чатами, файлами и внешними сервисами</span></div><div class="metric"><span class="metric-value">Результат</span><span class="metric-label">остаётся в виде ответа, а не рабочего артефакта или workflow</span></div><div class="metric"><span class="metric-value">Данные</span><span class="metric-label">не превращаются в управляемую базу знаний и долгую память</span></div><div class="metric"><span class="metric-value">Интеграция</span><span class="metric-label">требует сложной связки множества инструментов и ролей</span></div></div><div class="grid-2 stack-48"><div class="panel"><div class="kicker blue">Текущий рынок</div><h3>Фрагментированный UX</h3><ul class="list"><li>Чат-сервисы дают ответы, но не рабочую систему.</li><li>Инструменты для документов слабо соединены с агентами и кодом.</li><li>Внутренние команды теряют скорость на копировании контекста между средами.</li><li>Ценность AI распадается на набор мелких функций без единой платформенной логики.</li></ul></div><div class="panel"><div class="kicker green">Ответ ETRL Chat</div><h3>Платформа операционного уровня</h3><ul class="list"><li>Один интерфейс для диалога, анализа, поиска, создания и повторного использования знаний.</li><li>Artifacts и agents переводят AI из формата “ответил” в формат “сделал”.</li><li>Система рассчитана на долгую ежедневную работу и накопление контекста.</li><li>Это открывает путь к enterprise-истории, интеграциям и партнёрским сценариям.</li></ul></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">03 / Product Architecture</div><p class="eyebrow">Что внутри платформы</p><h2 class="section-title">Шесть продуктовых уровней образуют единую AI-инфраструктуру работы.</h2><p class="section-subtitle">Архитектура ETRL Chat построена так, чтобы пользователь не покидал среду ради следующего шага. От вопроса и файла до готового интерфейса, агентного процесса или структурированного знания — всё происходит внутри платформы.</p><div class="cards stack-48"><div class="tile"><div class="kicker blue">01 · Smart Chat</div><h3>Умный диалог с длинным контекстом</h3><p class="body">Ветвление диалогов, редактирование, перегенерация, markdown и удобная работа с длинными сессиями.</p></div><div class="tile"><div class="kicker green">02 · Documents</div><h3>Глубокий анализ файлов и RAG</h3><p class="body">PDF, DOCX, CSV, XLSX, изображения и скриншоты превращаются в ответы, summary, факты и цитаты.</p></div><div class="tile"><div class="kicker violet">03 · Artifacts</div><h3>Результат рядом с диалогом</h3><p class="body">Код, интерфейсы, схемы и визуальные артефакты открываются в отдельной рабочей области с превью.</p></div><div class="tile"><div class="kicker orange">04 · Agents</div><h3>Ролевые AI-сотрудники</h3><p class="body">Готовые и кастомные агенты с инструкциями, базами знаний, поиском и внешними инструментами.</p></div><div class="tile"><div class="kicker cyan">05 · Knowledge Layer</div><h3>Управление знаниями и навигацией</h3><p class="body">Поиск, папки, шаблоны, закладки и сохранение полезного контекста как часть повседневной работы.</p></div><div class="tile"><div class="kicker green">06 · Memory & Security</div><h3>Персонализация с контролем</h3><p class="body">Управляемая память, экспорт, настройки интерфейса, web/PWA-подход и базовые механизмы приватности.</p></div></div><div class="stack-40 panel"><p class="big-quote">Сильная сторона ETRL Chat — не одна функция, а связность между слоями: чат понимает документы, документы питают агентов, агенты создают артефакты, а память удерживает рабочий контекст.</p></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">04 / Differentiation</div><p class="eyebrow">Почему платформа выглядит сильнее типового AI-chat продукта</p><h2 class="section-title">Ключевая дифференциация — переход от “ассистента ответов” к “платформе исполнения и знаний”.</h2><p class="section-subtitle">Для стратегических партнеров это означает более высокий потенциал удержания, больше поверхностей для интеграции и значительно более широкие сценарии монетизации, чем у обычного AI-чата.</p><div class="matrix"><div class="head">Критерий</div><div class="head">Типичный AI-чат</div><div class="head">Точечный AI-инструмент</div><div class="head accent">ETRL Chat</div><div>Работа с длинным контекстом</div><div>Частично</div><div>Ограниченно</div><div class="accent">Да, как основа продукта</div><div>Документы + изображения + анализ</div><div>Неровно</div><div>Часто отдельно</div><div class="accent">Встроено в единый поток</div><div>Artifacts / live-результат</div><div>Редко</div><div>Только в спец. сервисах</div><div class="accent">Да, как нативный слой</div><div>Агенты с ролями и знаниями</div><div>Поверхностно</div><div>Только в enterprise-решениях</div><div class="accent">Да, внутри продукта</div><div>Knowledge & memory layer</div><div>Фрагментарно</div><div>Локально</div><div class="accent">Да, сквозной слой</div><div>Потенциал интеграции</div><div>Низкий–средний</div><div>Средний</div><div class="accent">Высокий платформенный</div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">05 / Use Cases</div><p class="eyebrow">Где продукт создаёт реальную ценность</p><h2 class="section-title">ETRL Chat особенно силён там, где нужно одновременно думать, искать, анализировать и создавать.</h2><p class="section-subtitle">Ниже — типовые сценарии, в которых партнёр может получить высокий value: как внутри своей команды, так и внутри клиентского предложения, white-label или интеграционного контура.</p><div class="grid-2 stack-48"><div class="panel"><div class="kicker violet">Product & Tech</div><h3>Разработка, аналитика, прототипирование</h3><ul class="list"><li>Разбор архитектуры, логики, требований и технической документации.</li><li>Создание UI-концептов, React/Tailwind-экранов и внутренних инструментов.</li><li>Быстрая итерация между идеей, кодом, артефактом и финальным решением.</li></ul></div><div class="panel"><div class="kicker green">Knowledge Work</div><h3>Документы, исследования, большие массивы информации</h3><ul class="list"><li>Поиск ответов по PDF и сложным пакетам материалов.</li><li>Summary, цитирование, extraction и подготовка управленческих выводов.</li><li>Снижение времени на разбор больших файлов и knowledge-heavy задач.</li></ul></div><div class="panel"><div class="kicker orange">Operations</div><h3>Агентные роли для повторяемых процессов</h3><ul class="list"><li>Специализированные AI-агенты под поддержку, аналитику, контент и пресейл.</li><li>Повторное использование инструкций, знаний и инструментов внутри ролей.</li><li>Подключение web search и внешних API для сценариев ближе к реальному бизнесу.</li></ul></div><div class="panel"><div class="kicker cyan">Multimodal</div><h3>Голос, изображения, скриншоты, mobile-потоки</h3><ul class="list"><li>Hands-free взаимодействие и озвучивание ответов.</li><li>Разбор графиков, интерфейсов, фотографий и визуальных материалов.</li><li>Удобный формат для field-команд, мобильных сценариев и быстрого захвата контекста.</li></ul></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">06 / Partner Value</div><p class="eyebrow">Почему это интересно партнёру</p><h2 class="section-title">Партнёр получает не просто продукт, а AI-платформу, вокруг которой можно строить собственную ценность.</h2><p class="section-subtitle">ETRL Chat можно рассматривать как фундамент для внедрений, расширений и совместных решений — от enterprise productivity и внутренних AI-workspaces до кастомных отраслевых контуров.</p><div class="partner-grid stack-48"><div class="partner-card"><div class="kicker blue">Integration Layer</div><h3>Интеграционный потенциал</h3><p class="body">Подключение внутренних знаний, API, агентных ролей и отраслевых сценариев делает продукт естественной основой для platform-extension модели.</p></div><div class="partner-card"><div class="kicker green">Distribution Layer</div><h3>Готовность к дистрибуции</h3><p class="body">Понятный AI UX, сильный визуальный слой и широкий пул use cases помогают легче выводить продукт в новые аудитории и каналы.</p></div><div class="partner-card"><div class="kicker violet">Monetization Layer</div><h3>Несколько контуров монетизации</h3><p class="body">Подписка, premium-возможности, корпоративные пакеты, специализированные агенты и брендированные внедрения могут сосуществовать в одной модели.</p></div></div><div class="pillars stack-40"><div class="panel"><div class="kicker orange">White-label / branded workspace</div><h3>Брендируемая AI-среда</h3><p class="body">Партнёр может использовать ETRL Chat как основу для собственного AI-workspace, усиливая свой продукт или экосистему без необходимости строить всё с нуля.</p></div><div class="panel"><div class="kicker cyan">Vertical solutions</div><h3>Отраслевые сценарии</h3><p class="body">Юридический анализ, консалтинг, разработка, продажи, knowledge-operations и обучающие контуры — платформа подходит для вертикализации под конкретные сегменты.</p></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">07 / Business Logic</div><p class="eyebrow">Продукт и монетизация</p><h2 class="section-title">Модель уже опирается на понятную продуктовую экономику и может масштабироваться в более дорогие контуры.</h2><p class="section-subtitle">Текущая freemium/PRO логика даёт низкий порог входа и понятную конверсионную лестницу. Для партнёров поверх неё могут строиться корпоративные тарифы, интеграционные пакеты и специализированные сценарии доступа.</p><div class="grid-3 stack-48"><div class="tile"><div class="kicker green">Freemium Entry</div><h3>Быстрый вход в продукт</h3><p class="body">Базовый бесплатный слой помогает формировать привычку ежедневного использования и сокращает friction первого контакта.</p></div><div class="tile"><div class="kicker blue">PRO Value</div><h3>Интенсивное использование</h3><p class="body">Безлимитные токены, высокий приоритет и активная daily-usage механика формируют понятную ценность для power users и команд.</p></div><div class="tile"><div class="kicker violet">Partner Upside</div><h3>Путь к enterprise and solutions</h3><p class="body">Дальнейшее расширение возможно через white-label, агентные пакеты, встроенные знания, отраслевые шаблоны и кастомные внедрения.</p></div></div><div class="panel stack-40"><p class="big-quote">Для стратегического партнёра особенно ценно то, что продуктовая логика не упирается в “чат по подписке”, а естественно раскрывается в платформу сервисов, интеграций и решений.</p></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">08 / Roadmap Direction</div><p class="eyebrow">Куда платформа может расти</p><h2 class="section-title">Следующий уровень развития — усиление платформенности, интеграций и enterprise-ready сценариев.</h2><p class="section-subtitle">Уже сейчас ETRL Chat выглядит как сильная основа. Для партнёрского разговора важно показать не только текущее состояние, но и стратегическую траекторию роста, понятную для продукта и бизнеса.</p><div class="timeline stack-48"><div class="timeline-card"><div class="kicker green">Stage 1</div><h3>Усиление core UX</h3><p class="body">Дальнейшее совершенствование диалога, навигации, памяти, артефактов и качества ежедневного использования.</p></div><div class="timeline-card"><div class="kicker blue">Stage 2</div><h3>Глубокие интеграции</h3><p class="body">Подключение внешних систем, внутренних знаний, API и агентных действий как нативных блоков платформы.</p></div><div class="timeline-card"><div class="kicker violet">Stage 3</div><h3>Вертикальные пакеты</h3><p class="body">Отраслевые решения под разработку, консалтинг, документы, поддержку и knowledge-intensive команды.</p></div><div class="timeline-card"><div class="kicker orange">Stage 4</div><h3>Enterprise layer</h3><p class="body">Расширенные контроли, командные роли, deeper governance и полноценные B2B-партнёрские модели.</p></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">09 / Strategic Fit</div><p class="eyebrow">С кем лучше всего синергирует продукт</p><h2 class="section-title">ETRL Chat особенно органично встраивается в экосистемы, где нужен AI-слой поверх знаний, команд и цифровых процессов.</h2><p class="section-subtitle">Наиболее перспективны партнёры, для которых AI — это не разовый маркетинговый модуль, а реальный способ усилить собственный продукт, сервис или инфраструктуру работы клиентов.</p><div class="grid-4 stack-48"><div class="tile"><div class="kicker blue">SaaS / Platforms</div><h3>Продуктовые экосистемы</h3><p class="body">Добавление AI-workspace слоя в существующий digital product.</p></div><div class="tile"><div class="kicker green">Consulting / Services</div><h3>Сервисные компании</h3><p class="body">Ускорение аналитики, подготовки материалов, ресёрча и внутренней экспертизы.</p></div><div class="tile"><div class="kicker violet">Education / Knowledge</div><h3>Образовательные и экспертные продукты</h3><p class="body">Интеллектуальная среда вокруг контента, учебных материалов и отраслевых баз знаний.</p></div><div class="tile"><div class="kicker orange">Enterprise Tech</div><h3>Корпоративные IT-контуры</h3><p class="body">AI-рабочее пространство для knowledge workers, команд и внутренних процессов.</p></div></div></div></section>
+
+      <section class="slide"><div class="slide-inner"><div class="slide-index">10 / Closing</div><p class="eyebrow">Финальный акцент</p><h2 class="section-title">ETRL Chat — это своевременная ставка на AI как на рабочую среду, а не на отдельную функцию.</h2><p class="section-subtitle">Партнёрство вокруг такой платформы даёт доступ не только к текущему продукту, но и к траектории, где AI становится полноценной частью цифровой инфраструктуры пользователя, команды и бизнеса.</p><div class="footer-grid stack-56"><div class="footer-card"><div class="kicker green">Strategic Summary</div><h3>Что получает партнёр</h3><ul class="list"><li>Продукт с современным premium UX и понятным платформенным позиционированием.</li><li>Широкий набор прикладных сценариев: от знаний и документов до кода, артефактов и агентных процессов.</li><li>Основание для интеграций, white-label, отраслевых решений и корпоративных моделей роста.</li><li>Историю, которая хорошо продаётся и стратегически масштабируется.</li></ul><div class="footer-note">Презентация подготовлена в фирменной визуальной системе ETRL Chat и может быть открыта как отдельный web experience.</div></div><div class="footer-card"><div class="kicker blue">Contact & Product</div><h3>ETRL Chat</h3><p class="body">AI Workspace для логики, кода, документов и интеллектуальной работы.</p><a class="cta" href="https://app.etrl.chat" target="_blank" rel="noreferrer">Открыть продукт →</a><div class="mini">Web: app.etrl.chat</div><div class="mini">Deck type: Strategic Partner Presentation</div><div class="mini">Format: standalone static site</div></div></div></div></section>
+    </main>
+  </body>
+</html>
