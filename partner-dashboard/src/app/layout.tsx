@@ -13,8 +13,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Partner Dashboard",
-  description: "Сервис аналитики для партнеров с защищенным доступом по секретному ключу.",
+  metadataBase: new URL("https://partners.etrl.chat"),
+  title: {
+    default: "ETRL Partner Dashboard",
+    template: "%s | ETRL Partner Dashboard",
+  },
+  description: "Партнерский кабинет ETRL с аналитикой по рефералам, оплатам, выручке и начислениям в реальном времени.",
+  applicationName: "ETRL Partner Dashboard",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  openGraph: {
+    title: "ETRL Partner Dashboard",
+    description: "Партнерский кабинет ETRL с аналитикой по рефералам, оплатам, выручке и начислениям в реальном времени.",
+    siteName: "ETRL Partner Dashboard",
+    locale: "ru_RU",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ETRL Partner Dashboard",
+    description: "Партнерский кабинет ETRL с аналитикой по рефералам, оплатам, выручке и начислениям в реальном времени.",
+  },
 };
 
 export default function RootLayout({

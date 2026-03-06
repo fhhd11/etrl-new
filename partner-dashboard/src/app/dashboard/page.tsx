@@ -1,4 +1,5 @@
 import { ReceiptText, UserRoundPlus, Wallet } from "lucide-react";
+import Image from "next/image";
 
 import { LineChartCard } from "@/components/dashboard/line-chart-card";
 import { LogoutButton } from "@/components/dashboard/logout-button";
@@ -34,9 +35,12 @@ export default async function DashboardPage() {
         <Card className="border-white/10 bg-zinc-900/50 text-white shadow-[0_25px_120px_-50px_rgba(16,185,129,0.35)]">
           <CardContent className="flex flex-col gap-6 px-6 py-6 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:py-8">
             <div className="space-y-3">
-              <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.24em] text-emerald-300">
-                ETRL Partner Dashboard
-              </span>
+              <div className="flex items-center gap-3">
+                <Image src="/logo.png" alt="ETRL" width={36} height={36} className="h-9 w-9 rounded-lg" priority />
+                <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.24em] text-emerald-300">
+                  ETRL Partner Dashboard
+                </span>
+              </div>
               <div className="space-y-2">
                 <h1 className="bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-2xl font-semibold tracking-tight text-transparent sm:text-3xl lg:text-4xl">
                   Здравствуйте, партнер {session.referrerCode}

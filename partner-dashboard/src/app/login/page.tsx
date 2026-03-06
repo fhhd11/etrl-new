@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components/login/login-form";
+import Image from "next/image";
 
 export default function LoginPage() {
   return (
@@ -8,9 +9,12 @@ export default function LoginPage() {
       <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl items-center justify-center">
         <div className="grid w-full gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <section className="space-y-6 text-white">
-            <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300 backdrop-blur-sm">
-              ETRL Partner Dashboard
-            </span>
+            <div className="flex items-center gap-3">
+              <Image src="/logo.png" alt="ETRL" width={40} height={40} className="h-10 w-10 rounded-xl" priority />
+              <span className="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-300 backdrop-blur-sm">
+                ETRL Partner Dashboard
+              </span>
+            </div>
             <div className="space-y-4">
               <h1 className="max-w-3xl bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
                 Аналитика партнёров ETRL с рефералами, оплатами и доходом в одной панели.
