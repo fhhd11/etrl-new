@@ -9,13 +9,14 @@ fileStrategy: "s3"
 interface:
   appTitle: 'ETRL Chat'
   customWelcome: 'Добро пожаловать в ETRL Chat!'
-  customCSS: true # <--- ПЕРЕНЕСЕНО СЮДА (из корня)
+  customCSS: true
   
-  runCode: false
+  # ВКЛЮЧАЕМ НОВЫЕ ВОЗМОЖНОСТИ
+  runCode: true          # Включает кнопку интерпретатора кода
   endpointsMenu: false 
   modelSelect: false
   parameters: false
-  presets: false
+  presets: true          # Включаем пресеты (полезно для сохранения системных промптов)
   showTokens: false
   
   sidePanel: true
@@ -24,13 +25,15 @@ interface:
   multiConvo: true
   fileCitations: true
   agents:
-    use: true
+    use: true           # Агенты - главная фишка системы
   prompts:
     use: true
   marketplace:
-    use: false
+    use: false          # Скрываем публичный маркетплейс (оставляем только приватный SaaS)
   mcpServers:
-    use: false
+    use: true
+    share: false
+    create: true
   privacyPolicy:
     externalUrl: 'https://etrl.chat/privacy'
     openNewTab: true
@@ -40,7 +43,14 @@ interface:
   helpAndFaqURL: ''
 
 # ==============================================================================
-# 2. ЭНДПОИНТЫ (Бэкенд)
+# 2. ВЕБ-ПОИСК И ПАРСИНГ (Интеграция ваших Serper и Jina)
+# ==============================================================================
+webSearch:
+  serperApiKey: '${SERPER_API_KEY}'
+  jinaApiKey: '${JINA_API_KEY}'
+
+# ==============================================================================
+# 3. ЭНДПОИНТЫ И АГЕНТЫ (Бэкенд)
 # ==============================================================================
 endpoints:
   custom:
@@ -56,24 +66,46 @@ endpoints:
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
       supportsFiles: true
       fileTypes: ['image/*', 'application/pdf', 'text/*']
+  agents:
+    capabilities: ['file_search', 'execute_code', 'web_search', 'actions', 'tools']
+    file_search:
+      max_num_results: 5
+      max_file_size: 10
 
 # ==============================================================================
-# 3. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ (То, что видит юзер)
+# 4. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ
 # ==============================================================================
 modelSpecs:
   list:
     - name: 'glm-4.7'
       label: 'ETRL AI'
-      description: 'Ваш персональный AI помощник'
-      default: true # Делаем модель основной
+      description: 'Ваш персональный AI помощник с доступом в интернет и коду'
+      default: true
       preset:
-        endpoint: 'etrl' # <--- ДОЛЖНО СОВПАДАТЬ С name В endpoints.custom ВЫШЕ
+        endpoint: 'etrl'
         model: 'glm-4.7'
       fileUpload: true
       visionCapable: true
 
 # ==============================================================================
-# 4. БИЛЛИНГ
+# 5. ПАМЯТЬ (Долгосрочный контекст)
+# ==============================================================================
+memory:
+  disabled: false
+  validKeys:
+    - "user_preferences"
+    - "conversation_context"
+    - "learned_facts"
+  tokenLimit: 2000
+  charLimit: 10000
+  personalize: true
+  messageWindowSize: 8
+  agent:
+    provider: "etrl"
+    model: "glm-4.7"
+
+# ==============================================================================
+# 6. БИЛЛИНГ И ЛИМИТЫ
 # ==============================================================================
 balance:
   enabled: true
@@ -83,9 +115,6 @@ balance:
   refillIntervalUnit: "days"
   refillAmount: 1000
 
-# ==============================================================================
-# 5. ОГРАНИЧЕНИЯ
-# ==============================================================================
 fileConfig:
   serverFileSizeLimit: 50
   avatarSizeLimit: 2
