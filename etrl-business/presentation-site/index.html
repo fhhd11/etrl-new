@@ -68,13 +68,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 42px;
-        height: 42px;
+        width: 46px;
+        height: 46px;
+        padding: 6px;
+        overflow: visible;
+        flex-shrink: 0;
         border-radius: 14px;
         border: 1px solid rgba(16, 185, 129, 0.22);
         background: linear-gradient(180deg, rgba(16, 185, 129, 0.16), rgba(16, 185, 129, 0.06));
       }
-      .brand-mark img { width: 22px; height: 22px; }
+      .brand-mark img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transform: translateY(-0.5px);
+      }
       .brand-copy h1 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
       .brand-copy p, .topbar-note, .eyebrow, .body, .metric-label, .list, .footer-note, .mini { color: var(--muted); }
       .brand-copy p, .topbar-note { margin: 2px 0 0; font-size: 12px; }
@@ -274,6 +284,16 @@
 
       @media (max-width: 1100px) {
         .deck { width: min(100vw - 24px, 1320px); padding-top: 14px; }
+        .topbar {
+          padding: 16px 18px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .topbar-note {
+          max-width: none;
+          text-align: left;
+        }
+        .slide-inner { padding: 32px; }
         .hero-title { font-size: 54px; }
         .section-title { font-size: 40px; }
         .hero-subtitle, .section-subtitle { font-size: 18px; }
@@ -281,6 +301,186 @@
           grid-template-columns: 1fr;
         }
         .slide, .slide-inner { min-height: auto; }
+      }
+
+      @media (max-width: 720px) {
+        .deck {
+          width: min(100vw - 16px, 1320px);
+          padding: 10px 0 24px;
+        }
+        .topbar {
+          gap: 12px;
+          margin-bottom: 12px;
+          padding: 14px;
+          border-radius: 16px;
+        }
+        .brand {
+          gap: 12px;
+          width: 100%;
+        }
+        .brand-mark {
+          width: 42px;
+          height: 42px;
+          padding: 5px;
+          border-radius: 13px;
+        }
+        .brand-copy h1 {
+          font-size: 15px;
+        }
+        .brand-copy p,
+        .topbar-note,
+        .eyebrow,
+        .metric-label,
+        .footer-note,
+        .mini {
+          font-size: 12px;
+        }
+        .slide {
+          margin-bottom: 16px;
+          border-radius: 20px;
+        }
+        .slide-inner {
+          padding: 20px;
+        }
+        .slide-index {
+          font-size: 11px;
+          padding: 7px 10px;
+        }
+        .hero-title,
+        .section-title {
+          margin-top: 16px;
+          line-height: 1;
+        }
+        .hero-title {
+          font-size: 34px;
+          max-width: none;
+        }
+        .section-title {
+          font-size: 28px;
+          max-width: none;
+        }
+        .hero-subtitle,
+        .section-subtitle,
+        .body,
+        .list {
+          font-size: 15px;
+          line-height: 1.6;
+        }
+        .stack-40,
+        .stack-48,
+        .stack-56 {
+          margin-top: 24px;
+        }
+        .panel,
+        .tile,
+        .timeline-card,
+        .partner-card,
+        .quote,
+        .footer-card {
+          padding: 18px;
+          border-radius: 16px;
+        }
+        .metric {
+          padding: 18px;
+        }
+        .metric-value {
+          font-size: 28px;
+        }
+        .panel h3,
+        .tile h3,
+        .partner-card h3,
+        .timeline-card h3,
+        .footer-card h3,
+        .spotlight h3 {
+          font-size: 20px;
+        }
+        .big-quote {
+          font-size: 22px;
+          line-height: 1.38;
+        }
+        .quote-source {
+          font-size: 13px;
+        }
+        .spotlight {
+          padding: 20px;
+          border-radius: 18px;
+        }
+        .highlight-row {
+          gap: 8px;
+          margin-top: 18px;
+        }
+        .highlight,
+        .kicker,
+        .cta {
+          font-size: 13px;
+        }
+        .highlight {
+          padding: 8px 12px;
+        }
+        .matrix {
+          grid-template-columns: 1fr;
+          border-radius: 16px;
+          margin-top: 24px;
+        }
+        .matrix div {
+          padding: 14px;
+          font-size: 14px;
+        }
+        .cta {
+          width: 100%;
+          justify-content: center;
+          padding: 13px 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .deck {
+          width: min(100vw - 12px, 1320px);
+        }
+        .topbar {
+          padding: 12px;
+          border-radius: 14px;
+        }
+        .brand {
+          align-items: flex-start;
+        }
+        .brand-copy h1 {
+          font-size: 14px;
+        }
+        .brand-copy p,
+        .topbar-note {
+          font-size: 11px;
+        }
+        .slide-inner {
+          padding: 16px;
+        }
+        .hero-title {
+          font-size: 30px;
+        }
+        .section-title {
+          font-size: 24px;
+        }
+        .hero-subtitle,
+        .section-subtitle,
+        .body,
+        .list,
+        .metric-label {
+          font-size: 14px;
+        }
+        .panel h3,
+        .tile h3,
+        .partner-card h3,
+        .timeline-card h3,
+        .footer-card h3,
+        .spotlight h3 {
+          font-size: 18px;
+        }
+        .metric-value {
+          font-size: 24px;
+        }
+        .big-quote {
+          font-size: 20px;
+        }
       }
     </style>
   </head>
