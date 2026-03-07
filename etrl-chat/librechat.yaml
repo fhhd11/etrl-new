@@ -13,7 +13,7 @@ interface:
   
   # ВКЛЮЧАЕМ НОВЫЕ ВОЗМОЖНОСТИ
   runCode: true          # Включает кнопку интерпретатора кода
-  endpointsMenu: false 
+  endpointsMenu: true    # <--- ВКЛЮЧЕНО! Это необходимо для отображения кнопки Агентов
   modelSelect: false
   parameters: false
   presets: true          # Включаем пресеты (полезно для сохранения системных промптов)
@@ -66,18 +66,13 @@ endpoints:
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
       supportsFiles: true
       fileTypes: ['image/*', 'application/pdf', 'text/*']
-  agents:
-    capabilities: ['file_search', 'execute_code', 'web_search', 'actions', 'tools']
-    file_search:
-      max_num_results: 5
-      max_file_size: 10
 
 # ==============================================================================
 # 4. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ
 # ==============================================================================
 modelSpecs:
   list:
-    - name: 'glm-4.7'
+    - name: 'etrl-core' # <--- ИЗМЕНЕНО! Теперь в URL будет ?spec=etrl-core
       label: 'ETRL AI'
       description: 'Ваш персональный AI помощник с доступом в интернет и коду'
       default: true
