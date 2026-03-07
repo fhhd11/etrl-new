@@ -24,8 +24,7 @@ interface:
   bookmarks: true
   multiConvo: true
   fileCitations: true
-  agents:
-    use: true           # Агенты - главная фишка системы
+  agents: true
   prompts:
     use: true
   marketplace:
