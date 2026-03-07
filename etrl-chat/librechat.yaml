@@ -53,18 +53,26 @@ webSearch:
 # ==============================================================================
 endpoints:
   custom:
-    - name: 'etrl' # Имя этого эндпоинта
+    - name: 'ETRL AI' # <--- 1. МЕНЯЕМ ИМЯ ПРОВАЙДЕРА ДЛЯ ИНТЕРФЕЙСА АГЕНТОВ
       apiKey: '${ETRL_API_KEY}'
       baseURL: 'https://api.z.ai/api/coding/paas/v4'
       models:
-        default: ['glm-4.7']
+        mapping:
+          'etrl-core-v1': 'glm-4.7'
+        default: ['etrl-core-v1']
         fetch: false
       titleConvo: true
-      titleModel: 'glm-4.7'
+      titleModel: 'etrl-core-v1'
       modelDisplayLabel: 'ETRL AI'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
       supportsFiles: true
       fileTypes: ['image/*', 'application/pdf', 'text/*']
+
+  agents:
+    capabilities: ['file_search', 'execute_code', 'web_search', 'actions', 'tools']
+    file_search:
+      max_num_results: 5
+      max_file_size: 10
 
 # ==============================================================================
 # 4. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ
@@ -76,8 +84,8 @@ modelSpecs:
       description: 'Ваш персональный AI помощник с доступом в интернет и коду'
       default: true
       preset:
-        endpoint: 'etrl'
-        model: 'glm-4.7'
+        endpoint: 'ETRL AI'
+        model: 'etrl-core-v1'
       fileUpload: true
       visionCapable: true
 
@@ -95,8 +103,8 @@ memory:
   personalize: true
   messageWindowSize: 8
   agent:
-    provider: "etrl"
-    model: "glm-4.7"
+    provider: "ETRL AI"
+    model: "etrl-core-v1"
 
 # ==============================================================================
 # 6. БИЛЛИНГ И ЛИМИТЫ
