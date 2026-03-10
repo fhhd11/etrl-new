@@ -58,7 +58,7 @@ endpoints:
       baseURL: 'https://api.z.ai/api/coding/paas/v4'
       models:
         mapping:
-          'etrl-core-v1': 'glm-4.7'
+          'etrl-core-v1': 'glm-5'
         default: ['etrl-core-v1']
         fetch: false
       titleConvo: true
