@@ -49,20 +49,19 @@ webSearch:
   jinaApiKey: '${JINA_API_KEY}'
 
 # ==============================================================================
-# 3. ЭНДПОИНТЫ И АГЕНТЫ (Бэкенд)
+# 3. ЭНДПОИНТЫ И АГЕНТЫ (БЭКЕНД)
 # ==============================================================================
 endpoints:
   custom:
-    - name: 'ETRL AI' # <--- 1. МЕНЯЕМ ИМЯ ПРОВАЙДЕРА ДЛЯ ИНТЕРФЕЙСА АГЕНТОВ
+    - name: 'ETRL AI'
       apiKey: '${ETRL_API_KEY}'
       baseURL: 'https://api.z.ai/api/coding/paas/v4'
       models:
-        mapping:
-          'etrl-core-v1': 'glm-5'
-        default: ['etrl-core-v1']
+        # УБРАЛИ mapping. Оставляем только реальное имя модели, которое понимает API
+        default: ['glm-4.7']
         fetch: false
       titleConvo: true
-      titleModel: 'etrl-core-v1'
+      titleModel: 'glm-4.7' # ИСПРАВЛЕНО: Генератор заголовков больше не будет падать
       modelDisplayLabel: 'ETRL AI'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
       supportsFiles: true
@@ -75,22 +74,22 @@ endpoints:
       max_file_size: 10
 
 # ==============================================================================
-# 4. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ
+# 4. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ (ФРОНТЕНД - То, что видит юзер)
 # ==============================================================================
 modelSpecs:
   list:
-    - name: 'etrl-core' # <--- ИЗМЕНЕНО! Теперь в URL будет ?spec=etrl-core
+    - name: 'etrl-core'
       label: 'ETRL AI'
       description: 'Ваш персональный AI помощник с доступом в интернет и коду'
       default: true
       preset:
         endpoint: 'ETRL AI'
-        model: 'etrl-core-v1'
+        model: 'glm-4.7' # ИСПРАВЛЕНО: Привязываем к реальной модели
       fileUpload: true
       visionCapable: true
 
 # ==============================================================================
-# 5. ПАМЯТЬ (Долгосрочный контекст)
+# 5. ПАМЯТЬ
 # ==============================================================================
 memory:
   disabled: false
@@ -104,7 +103,7 @@ memory:
   messageWindowSize: 8
   agent:
     provider: "ETRL AI"
-    model: "etrl-core-v1"
+    model: "glm-4.7" # ИСПРАВЛЕНО: Фоновый агент памяти больше не будет падать
 
 # ==============================================================================
 # 6. БИЛЛИНГ И ЛИМИТЫ
