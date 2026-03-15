@@ -133,7 +133,7 @@ const AttachFileMenu = ({
         endpoint === 'ETRL AI' || currentProvider === 'ETRL AI' || provider === 'ETRL AI';
 
       if (isETRLAI) {
-        if (capabilities.fileSearchEnabled && fileSearchAllowedByAgent) {
+        if (capabilities.fileSearchEnabled) {
           items.push({
             label: localize('com_ui_upload_file_search'),
             onClick: () => {
