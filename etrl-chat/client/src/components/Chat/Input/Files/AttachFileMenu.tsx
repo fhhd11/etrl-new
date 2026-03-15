@@ -129,11 +129,14 @@ const AttachFileMenu = ({
 
       const isAzureWithResponsesApi =
         currentProvider === EModelEndpoint.azureOpenAI && useResponsesApi;
+      const hideProviderUpload =
+        endpoint === 'ETRL AI' || currentProvider === 'ETRL AI' || provider === 'ETRL AI';
 
       if (
-        isDocumentSupportedProvider(endpointType) ||
-        isDocumentSupportedProvider(currentProvider) ||
-        isAzureWithResponsesApi
+        !hideProviderUpload &&
+        (isDocumentSupportedProvider(endpointType) ||
+          isDocumentSupportedProvider(currentProvider) ||
+          isAzureWithResponsesApi)
       ) {
         items.push({
           label: localize('com_ui_upload_provider'),
