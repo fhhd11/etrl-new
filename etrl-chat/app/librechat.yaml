@@ -66,8 +66,6 @@ endpoints:
       titleModel: 'etrl-core-v1'
       modelDisplayLabel: 'ETRL AI'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
-      supportsFiles: true
-      fileTypes: ['image/*', 'application/pdf', 'text/*']
 
   agents:
     capabilities: ['file_search', 'execute_code', 'web_search', 'actions', 'tools']
@@ -88,7 +86,7 @@ modelSpecs:
         endpoint: 'ETRL AI'
         model: 'etrl-core-v1'
       fileUpload: true
-      visionCapable: true
+      visionCapable: false
 
 # ==============================================================================
 # 5. ПАМЯТЬ (Долгосрочный контекст)

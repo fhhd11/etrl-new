@@ -64,8 +64,6 @@ endpoints:
       titleModel: 'glm-4.7' # ИСПРАВЛЕНО: Генератор заголовков больше не будет падать
       modelDisplayLabel: 'ETRL AI'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
-      supportsFiles: true
-      fileTypes: ['image/*', 'application/pdf', 'text/*']
 
   agents:
     capabilities: ['file_search', 'execute_code', 'web_search', 'actions', 'tools']
@@ -86,7 +84,7 @@ modelSpecs:
         endpoint: 'ETRL AI'
         model: 'glm-4.7' # ИСПРАВЛЕНО: Привязываем к реальной модели
       fileUpload: true
-      visionCapable: true
+      visionCapable: false
 
 # ==============================================================================
 # 5. ПАМЯТЬ
