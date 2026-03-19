@@ -58,13 +58,13 @@ endpoints:
       baseURL: 'https://api.z.ai/api/coding/paas/v4'
       models:
         # УБРАЛИ mapping. Оставляем только реальное имя модели, которое понимает API
-        default: ['glm-4.7']
+        default: ['glm-4.6v']
         fetch: false
       titleConvo: true
-      titleModel: 'glm-4.7' # ИСПРАВЛЕНО: Генератор заголовков больше не будет падать
+      titleModel: 'glm-4.6v' # ИСПРАВЛЕНО: Генератор заголовков больше не будет падать
       modelDisplayLabel: 'ETRL AI'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
-      supportsFiles: false
+      supportsFiles: true
 
   agents:
     capabilities: ['context', 'file_search', 'execute_code', 'web_search', 'actions', 'tools']
@@ -83,9 +83,9 @@ modelSpecs:
       default: true
       preset:
         endpoint: 'ETRL AI'
-        model: 'glm-4.7' # ИСПРАВЛЕНО: Привязываем к реальной модели
+        model: 'glm-4.6v' # ИСПРАВЛЕНО: Привязываем к реальной модели
       fileUpload: true
-      visionCapable: false
+      visionCapable: true
 
 # ==============================================================================
 # 5. ПАМЯТЬ
@@ -102,7 +102,7 @@ memory:
   messageWindowSize: 8
   agent:
     provider: "ETRL AI"
-    model: "glm-4.7" # ИСПРАВЛЕНО: Фоновый агент памяти больше не будет падать
+    model: "glm-4.6v" # ИСПРАВЛЕНО: Фоновый агент памяти больше не будет падать
 
 # ==============================================================================
 # 6. БИЛЛИНГ И ЛИМИТЫ

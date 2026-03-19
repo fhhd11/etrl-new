@@ -129,42 +129,6 @@ const AttachFileMenu = ({
 
       const isAzureWithResponsesApi =
         currentProvider === EModelEndpoint.azureOpenAI && useResponsesApi;
-      const isETRLAI =
-        endpoint === 'ETRL AI' || currentProvider === 'ETRL AI' || provider === 'ETRL AI';
-
-      if (isETRLAI) {
-        if (capabilities.fileSearchEnabled) {
-          items.push({
-            label: localize('com_ui_upload_file_search'),
-            onClick: () => {
-              setToolResource(EToolResources.file_search);
-              setEphemeralAgent((prev) => ({
-                ...prev,
-                [EToolResources.file_search]: true,
-              }));
-              onAction();
-            },
-            icon: <FileSearch className="icon-md" />,
-          });
-        }
-
-        if (capabilities.codeEnabled && codeAllowedByAgent) {
-          items.push({
-            label: localize('com_ui_upload_code_files'),
-            onClick: () => {
-              setToolResource(EToolResources.execute_code);
-              setEphemeralAgent((prev) => ({
-                ...prev,
-                [EToolResources.execute_code]: true,
-              }));
-              onAction();
-            },
-            icon: <TerminalSquareIcon className="icon-md" />,
-          });
-        }
-
-        return items;
-      }
 
       if (
         isDocumentSupportedProvider(endpointType) ||
