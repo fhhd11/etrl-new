@@ -121,4 +121,52 @@ describe('Document Parser', () => {
 
     await expect(parseDocument({ file })).rejects.toThrow('No text found in document');
   });
+
+  test('parseDocument() rejects files exceeding the pre-parse size limit', async () => {
+    const file = {
+      originalname: 'oversized.docx',
+      path: path.join(__dirname, 'sample.docx'),
+      mimetype: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      size: 16 * 1024 * 1024,
+    } as Express.Multer.File;
+
+    await expect(parseDocument({ file })).rejects.toThrow(
+      /exceeds the 15MB document parser limit \(16MB\)/,
+    );
+  });
+
+  test('parseDocument() allows files exactly at the size limit boundary', async () => {
+    const file = {
+      originalname: 'sample.docx',
+      path: path.join(__dirname, 'sample.docx'),
+      mimetype: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      size: 15 * 1024 * 1024,
+    } as Express.Multer.File;
+
+    await expect(parseDocument({ file })).resolves.toBeDefined();
+  });
+
+  test('parseDocument() parses empty xlsx with only sheet name', async () => {
+    const file = {
+      originalname: 'empty.xlsx',
+      path: path.join(__dirname, 'empty.xlsx'),
+      mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    } as Express.Multer.File;
+
+    const document = await parseDocument({ file });
+
+    expect(document).toEqual({
+      bytes: 8,
+      filename: 'empty.xlsx',
+      filepath: 'document_parser',
+      images: [],
+      text: 'Empty:\n\n',
+    });
+  });
+
+  test('xlsx exports read and utils as named imports', async () => {
+    const { read, utils } = await import('xlsx');
+    expect(typeof read).toBe('function');
+    expect(typeof utils?.sheet_to_csv).toBe('function');
+  });
 });

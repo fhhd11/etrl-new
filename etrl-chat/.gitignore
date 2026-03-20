@@ -71,7 +71,7 @@ bower_components/
 .flooignore
 
 #config file
-# librechat.yaml - REMOVED: needed for deployment
+librechat.yaml
 librechat.yml
 
 # Environment
@@ -154,7 +154,7 @@ claude-flow.config.json
 .swarm/
 .hive-mind/
 .claude-flow/
-# memory/ - REMOVED: needed for deployment
+memory/
 coordination/
 memory/claude-flow-data.json
 memory/sessions/*

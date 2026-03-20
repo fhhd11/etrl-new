@@ -24,23 +24,6 @@ const registrationController = async (req, res) => {
   try {
     const response = await registerUser(req.body);
     const { status, message } = response;
-
-    // --- ETRL REFERRAL HOOK ---
-    try {
-      const refCode = req.cookies ? req.cookies.ref_code : null;
-      const newUser = status === 200 ? await findUser({ email: req.body.email }, '_id') : null;
-      if (refCode && newUser && newUser._id) {
-        fetch('https://etrl.chat/api/referral/save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: newUser._id.toString(), ref: refCode })
-        }).catch(err => console.error('[ETRL] Referral hook failed:', err.message));
-      }
-    } catch (err) {
-      console.error('[ETRL] Error processing referral cookie:', err.message);
-    }
-    // --- END ETRL REFERRAL HOOK ---
-
     res.status(status).send({ message });
   } catch (err) {
     logger.error('[registrationController]', err);
@@ -136,14 +119,8 @@ const refreshController = async (req, res) => {
 
       const token = setOpenIDAuthTokens(tokenset, req, res, user._id.toString(), refreshToken);
 
-      user.federatedTokens = {
-        access_token: tokenset.access_token,
-        id_token: tokenset.id_token,
-        refresh_token: refreshToken,
-        expires_at: claims.exp,
-      };
-
-      return res.status(200).send({ token, user });
+      const { password: _pw, __v: _v, totpSecret: _ts, backupCodes: _bc, ...safeUser } = user;
+      return res.status(200).send({ token, user: safeUser });
     } catch (error) {
       logger.error('[refreshController] OpenID token refresh error', error);
       return res.status(403).send('Invalid OpenID refresh token');
