@@ -60,7 +60,6 @@ endpoints:
       fileTypes: ['image/*', 'application/pdf', 'text/*']
 
   agents:
-    disableBuilder: true
     allowedProviders:
       - 'litellm'
     recursionLimit: 25
