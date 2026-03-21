@@ -39,6 +39,7 @@ import { useResetChatBadges } from './useChatBadges';
 import { useApplyModelSpecEffects } from './Agents';
 import { usePauseGlobalAudio } from './Audio';
 import { useHasAccess } from '~/hooks';
+import { useAgentsMapContext } from '~/Providers/AgentsMapContext';
 import store from '~/store';
 
 const useNewConvo = (index = 0) => {
@@ -62,6 +63,7 @@ const useNewConvo = (index = 0) => {
 
   const modelsQuery = useGetModelsQuery();
   const assistantsListMap = useAssistantListMap();
+  const agentsMap = useAgentsMapContext();
   const { pauseGlobalAudio } = usePauseGlobalAudio(index);
   const saveDrafts = useRecoilValue<boolean>(store.saveDrafts);
   const resetBadges = useResetChatBadges();
@@ -299,8 +301,19 @@ const useNewConvo = (index = 0) => {
       };
 
       let preset = _preset;
+      const singleAgent =
+        agentsMap && Object.keys(agentsMap).length === 1 ? Object.values(agentsMap)[0] : undefined;
       const result = getDefaultModelSpec(startupConfig);
       const defaultModelSpec = result?.default ?? result?.last;
+      if (!preset && singleAgent?.id) {
+        preset = {
+          endpoint: EModelEndpoint.agents,
+          agent_id: singleAgent.id,
+          conversationId: Constants.NEW_CONVO as string,
+        };
+        conversation.endpoint = EModelEndpoint.agents;
+        conversation.agent_id = singleAgent.id;
+      }
       if (
         !preset &&
         startupConfig &&
@@ -365,6 +378,7 @@ const useNewConvo = (index = 0) => {
       pauseGlobalAudio,
       switchToConversation,
       applyModelSpecEffects,
+      agentsMap,
     ],
   );
 
