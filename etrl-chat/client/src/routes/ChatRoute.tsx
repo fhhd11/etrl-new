@@ -19,8 +19,11 @@ import {
   useAppStartup,
   useNewConvo,
   useLocalize,
+  useMessageAndVoice,
 } from '~/hooks';
 import { useGetConvoIdQuery, useGetStartupConfig, useGetEndpointsQuery } from '~/data-provider';
+import { useGetAssistantsQuery } from '~/data-provider';
+import { useAgentsMapContext } from '~/Providers/AgentsMapContext';
 import { ToolCallsMapProvider } from '~/Providers';
 import ChatView from '~/components/Chat/ChatView';
 import { NotificationSeverity } from '~/common';
@@ -50,6 +53,7 @@ export default function ChatRoute() {
   const { newConversation } = useNewConvo();
   const { showToast } = useToastContext();
   const localize = useLocalize();
+  const agentsMap = useAgentsMapContext();
 
   const modelsQuery = useGetModelsQuery({
     enabled: isAuthenticated,
@@ -89,11 +93,27 @@ export default function ChatRoute() {
     }
 
     const isNewConvo = conversationId === Constants.NEW_CONVO;
+    const hasAgentsEnabled = startupConfig?.interface?.agents?.use === true;
+    const agentsReady = !hasAgentsEnabled || Object.keys(agentsMap ?? {}).length > 0;
+
+    if (isNewConvo && hasAgentsEnabled && !agentsReady) {
+      return;
+    }
 
     const getNewConvoPreset = () => {
       const result = getDefaultModelSpec(startupConfig);
       const spec = result?.default ?? result?.last;
       const specPreset = spec ? getModelSpecPreset(spec) : undefined;
+      const singleAgent =
+        agentsMap && Object.keys(agentsMap).length === 1 ? Object.values(agentsMap)[0] : undefined;
+
+      if (singleAgent?.id) {
+        return {
+          ...(specPreset ?? {}),
+          endpoint: EModelEndpoint.agents,
+          agent_id: singleAgent.id,
+        };
+      }
 
       const queryParams: Record<string, string> = {};
       searchParams.forEach((value, key) => {
@@ -190,6 +210,7 @@ export default function ChatRoute() {
     endpointsQuery.data,
     modelsQuery.data,
     assistantListMap,
+    agentsMap,
   ]);
 
   if (endpointsQuery.isLoading || modelsQuery.isLoading) {
