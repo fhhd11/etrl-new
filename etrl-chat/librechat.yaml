@@ -61,6 +61,8 @@ endpoints:
 
   agents:
     disableBuilder: true
+    allowedProviders:
+      - 'litellm'
     recursionLimit: 25
     maxRecursionLimit: 50
     maxCitations: 30
@@ -90,7 +92,6 @@ modelSpecs:
       preset:
         endpoint: 'agents'
         agent_id: 'etrl-default-agent'
-        model: 'etrl-ai'
       fileUpload: true
       visionCapable: true
       webSearch: true
