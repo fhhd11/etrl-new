@@ -92,6 +92,7 @@ modelSpecs:
       preset:
         endpoint: 'agents'
         agent_id: 'etrl-default-agent'
+        model: 'etrl-ai'
       fileUpload: true
       visionCapable: true
       webSearch: true
