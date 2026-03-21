@@ -52,12 +52,13 @@ async function buildEndpointOption(req, res, next) {
     /** @type {{ list: TModelSpec[] }}*/
     const { list } = appConfig.modelSpecs;
     const { spec } = parsedBody;
+    const selectedSpec = spec ?? (list.length === 1 ? list[0]?.name : undefined);
 
-    if (!spec) {
+    if (!selectedSpec) {
       return handleError(res, { text: 'No model spec selected' });
     }
 
-    const currentModelSpec = list.find((s) => s.name === spec);
+    const currentModelSpec = list.find((s) => s.name === selectedSpec);
     if (!currentModelSpec) {
       return handleError(res, { text: 'Invalid model spec' });
     }
@@ -67,7 +68,7 @@ async function buildEndpointOption(req, res, next) {
     }
 
     try {
-      currentModelSpec.preset.spec = spec;
+      currentModelSpec.preset.spec = selectedSpec;
       parsedBody = parseCompactConvo({
         endpoint,
         endpointType,
