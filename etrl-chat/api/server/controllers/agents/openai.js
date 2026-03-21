@@ -204,7 +204,10 @@ const OpenAIChatCompletionController = async (req, res) => {
     // Initialize the agent first to check for disableStreaming
     const endpointOption = {
       endpoint: agent.provider,
-      model_parameters: agent.model_parameters ?? {},
+      model_parameters: {
+        model: agent.model,
+        ...(agent.model_parameters ?? {}),
+      },
     };
 
     const primaryConfig = await initializeAgent(
