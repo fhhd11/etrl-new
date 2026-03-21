@@ -44,33 +44,59 @@ interface:
 # ==============================================================================
 endpoints:
   custom:
-    - name: 'etrl' # Имя этого эндпоинта
-      apiKey: '${ETRL_API_KEY}'
-      baseURL: 'https://api.z.ai/api/coding/paas/v4'
+    - name: 'litellm' # Единый OpenAI-compatible gateway для LibreChat
+      apiKey: '${LITELLM_API_KEY}'
+      baseURL: 'https://saas-litellm-gateway-production.up.railway.app'
       models:
-        default: ['glm-4.7']
+        default:
+          - 'etrl-ai'
+          - 'my-model'
         fetch: false
       titleConvo: true
-      titleModel: 'glm-4.7'
+      titleModel: 'etrl-ai'
       modelDisplayLabel: 'ETRL AI'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
       supportsFiles: true
       fileTypes: ['image/*', 'application/pdf', 'text/*']
+
+  agents:
+    disableBuilder: true
+    recursionLimit: 25
+    maxRecursionLimit: 50
+    maxCitations: 30
+    maxCitationsPerFile: 7
+    minRelevanceScore: 0.45
+    capabilities:
+      - deferred_tools
+      - execute_code
+      - file_search
+      - web_search
+      - artifacts
+      - actions
+      - context
+      - tools
+      - chain
+      - ocr
 
 # ==============================================================================
 # 3. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ (То, что видит юзер)
 # ==============================================================================
 modelSpecs:
   list:
-    - name: 'glm-4.7'
+    - name: 'etrl-ai'
       label: 'ETRL AI'
-      description: 'Ваш персональный AI помощник'
+      description: 'Единый агент ETRL для чата, файлов, поиска и инструментов'
       default: true # Делаем модель основной
       preset:
-        endpoint: 'etrl' # <--- ДОЛЖНО СОВПАДАТЬ С name В endpoints.custom ВЫШЕ
-        model: 'glm-4.7'
+        endpoint: 'agents'
+        agent_id: 'etrl-default-agent'
       fileUpload: true
       visionCapable: true
+      webSearch: true
+      fileSearch: true
+      executeCode: true
+      mcpServers:
+        - 'default'
 
 # ==============================================================================
 # 4. БИЛЛИНГ
