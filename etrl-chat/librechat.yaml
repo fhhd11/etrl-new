@@ -84,6 +84,8 @@ endpoints:
 # 3. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ (То, что видит юзер)
 # ==============================================================================
 modelSpecs:
+  enforce: true
+  prioritize: true
   list:
     - name: 'etrl-ai'
       label: 'ETRL AI'
