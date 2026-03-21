@@ -13,9 +13,9 @@ interface:
   
   runCode: false
   endpointsMenu: false 
-  modelSelect: false
+  modelSelect: true
   parameters: false
-  presets: false
+  presets: true
   showTokens: false
   
   sidePanel: true
