@@ -10,6 +10,7 @@ const DEFAULT_AGENT_ID = 'etrl-default-agent';
 const DEFAULT_AGENT_NAME = 'ETRL AI';
 const DEFAULT_MODEL = 'etrl-ai';
 const DEFAULT_PROVIDER = 'litellm';
+const DEFAULT_AUTHOR_ID = new mongoose.Types.ObjectId('69a1647a17f64863ae096c26');
 const DEFAULT_INSTRUCTIONS = [
   'You are ETRL AI, the single default assistant for the ETRL Chat product.',
   'Be useful across general chat, file analysis, coding help, web research, and tool use.',
@@ -35,6 +36,7 @@ async function seedDefaultAgent() {
   let agent = existing;
 
   const agentData = {
+    author: DEFAULT_AUTHOR_ID,
     id: DEFAULT_AGENT_ID,
     name: DEFAULT_AGENT_NAME,
     description: 'Canonical default ETRL agent for all users',
@@ -65,6 +67,7 @@ async function seedDefaultAgent() {
       { id: DEFAULT_AGENT_ID },
       {
         $set: {
+          author: DEFAULT_AUTHOR_ID,
           name: DEFAULT_AGENT_NAME,
           description: agentData.description,
           instructions: agentData.instructions,
