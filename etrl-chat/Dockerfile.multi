@@ -75,6 +75,7 @@ RUN uv --version
 WORKDIR /app
 # Install only production deps
 RUN npm ci --omit=dev
+COPY librechat.yaml ./librechat.yaml
 COPY api ./api
 COPY config ./config
 COPY --from=data-provider-build /app/packages/data-provider/dist ./packages/data-provider/dist
