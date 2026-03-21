@@ -13,9 +13,9 @@ interface:
   
   runCode: false
   endpointsMenu: false 
-  modelSelect: true
+  modelSelect: false
   parameters: false
-  presets: true
+  presets: false
   showTokens: false
   
   sidePanel: true
@@ -84,8 +84,8 @@ endpoints:
 # 3. СПЕЦИФИКАЦИЯ МОДЕЛЕЙ (То, что видит юзер)
 # ==============================================================================
 modelSpecs:
-  enforce: true
-  prioritize: true
+  enforce: false
+  prioritize: false
   list:
     - name: 'etrl-ai'
       label: 'ETRL AI'
